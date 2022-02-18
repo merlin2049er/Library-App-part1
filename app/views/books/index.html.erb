@@ -1,0 +1,37 @@
+<h1>Books</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Genre</th>
+      <th>Subgenre</th>
+      <th>Pages</th>
+      <th>Publisher</th>
+      <th>Copies</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @books.each do |book| %>
+      <tr>
+        <td><%= book.Title %></td>
+        <td><%= book.Author %></td>
+        <td><%= book.Genre %></td>
+        <td><%= book.Subgenre %></td>
+        <td><%= book.Pages %></td>
+        <td><%= book.Publisher %></td>
+        <td><%= book.Copies %></td>
+        <td><%= link_to 'Show', book %></td>
+        <td><%= link_to 'Edit', edit_book_path(book) %></td>
+        <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Book', new_book_path %>
