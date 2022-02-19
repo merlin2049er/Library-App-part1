@@ -68,7 +68,10 @@ class BooksController < ApplicationController
   def borrow
 
   id = params[:id]
+    # check to see if book is already checked out no more than 1 copy at a time
+    already_checkedout = Checkedout.where({ book_id: id, checkedoutstatus: true })
 
+  if  already_checkedout.count == 0
     # write to table checkedout
     c = Checkedout.new
     c.user_id = id
@@ -79,6 +82,10 @@ class BooksController < ApplicationController
     c.save
 
     flash.alert = @book.Title + " checked out..."
+    else
+      flash.alert = @book.Title + " already checked out, one copy permitted..."
+    end
+
     redirect_to root_path
 
   end
