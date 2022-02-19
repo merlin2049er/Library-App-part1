@@ -10,6 +10,7 @@ require 'csv'
 csv_text = File.read(Rails.root.join('db','seeds','testdatapart1.csv'))
 csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
 
+# add books to book table
 csv.each do |row|
   t = Book.new
   t.Title = row['Title']
@@ -20,6 +21,4 @@ csv.each do |row|
   t.Publisher = row['Publisher']
   t.Copies = row['Copies']
   t.save
-
-
 end
