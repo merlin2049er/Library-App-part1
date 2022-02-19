@@ -20,5 +20,6 @@ csv.each do |row|
   t.Pages = row['Pages']
   t.Publisher = row['Publisher']
   t.Copies = row['Copies']
-  t.save
+a =  t.save
+puts a.errors.inspect
 end
