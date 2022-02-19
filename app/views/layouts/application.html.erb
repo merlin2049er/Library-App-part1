@@ -14,6 +14,16 @@
       <p class="alert"><%= alert %></p>
 
   <body>
+    <h1><%= link_to   "Local Library System", books_path %></h1>
+
+    <% if user_signed_in? %>
+      <%= link_to current_user.email, edit_user_registration_path %>
+      <%= link_to "Log out", destroy_user_session_path, method: :delete %>
+<% else %>
+      <%= link_to "Log in", new_user_session_path %>
+      <%= link_to "Register", new_user_registration_path %>
+<% end %>
+
     <%= yield %>
   </body>
 </html>

@@ -57,6 +57,14 @@ class BooksController < ApplicationController
     end
   end
 
+  def borrow
+
+  end
+
+  def checkedout
+
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_book
