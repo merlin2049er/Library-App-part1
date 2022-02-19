@@ -5,7 +5,10 @@ Rails.application.routes.draw do
 
   root to: "books#index"
   get 'borrow/(:id)', to: 'books#borrow'
-  get 'borrow/(:id)', to: 'books#checkedout'
+  get 'checkedout/(:id)', to: 'books#checkedout'
+  get 'booklog', to: 'books#booklog'
 
+  post 'borrow/(:id)', to: 'books#borrow'
+  get 'return/(:id)', to: 'books#return'
 
 end

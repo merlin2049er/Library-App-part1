@@ -33,5 +33,44 @@
   <%= @book.Copies %>
 </p>
 
+<% if @count >0 %>
+<p>
+  <strong>Checked out by:</strong>
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Patreon </th>
+      <th>Checkout date</th>
+      <th>Due date</th>
+      <th>Status</th>
+
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @checkdoutby.each do |book| %>
+      <tr>
+        <td> fred </td>
+        <td><%= book.checkedout %></td>
+        <td><%= book.duedate %></td>
+        <td><%= book.checkedoutstatus %></td>
+
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% else %>
+No books checked out...
+<br>
+<% end %>
+
+
+
+
 <%= link_to 'Edit', edit_book_path(@book) %> |
 <%= link_to 'Back', books_path %>

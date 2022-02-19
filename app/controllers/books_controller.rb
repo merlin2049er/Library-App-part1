@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: %i[ show edit update destroy borrow]
+  before_action :set_book, only: %i[ show edit update destroy borrow return]
 
   # GET /books or /books.json
   def index
@@ -8,6 +8,11 @@ class BooksController < ApplicationController
 
   # GET /books/1 or /books/1.json
   def show
+
+    id = params[:id]
+    @checkdoutby = Checkedout.where({ book_id: id, checkedoutstatus: true })
+    @count = @checkdoutby.count
+
   end
 
   # GET /books/new
@@ -59,9 +64,45 @@ class BooksController < ApplicationController
 
   def borrow
 
+  id = params[:id]
+
+    # write to table checkedout
+    c = Checkedout.new
+    c.user_id = id
+    c.book_id = @book.id
+    c.checkedout = Date.today
+    c.duedate = Date.today + 7
+    c.checkedoutstatus = 'True'
+    c.save
+
+    flash.alert = @book.Title + " checked out..."
+    redirect_to root_path
+
   end
 
   def checkedout
+
+    @checkedout = Checkedout.where('user_id =?', current_user.id).and(Checkedout.where(checkedoutstatus: true))
+    @count = @checkedout.count
+
+  end
+
+  def booklog
+
+    @booklog = Checkedout.all
+    @count = Checkedout.count
+
+  end
+
+  def return
+
+    id = params[:id]
+
+    returned = Checkedout.where(book_id: id).and(Checkedout.where(checkedoutstatus: true))
+    returned.update(checkedoutstatus: false, returndate: Date.today)
+
+    flash.alert =  "book returned..."
+    redirect_to root_path
 
   end
 
