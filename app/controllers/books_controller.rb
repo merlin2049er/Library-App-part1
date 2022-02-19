@@ -1,9 +1,12 @@
 class BooksController < ApplicationController
+  include Pagy::Backend
   before_action :set_book, only: %i[ show edit update destroy borrow return]
 
   # GET /books or /books.json
   def index
     @books = Book.all
+
+      @pagy, @books = pagy(@books)
   end
 
   # GET /books/1 or /books/1.json

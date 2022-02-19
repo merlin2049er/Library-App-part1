@@ -35,7 +35,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 
 # Flexible authentication solution for Rails with Warden
 gem 'devise', '~> 4.8', '>= 4.8.1'
-
+gem 'pagy', '~> 4.1'
 
 
 group :development, :test do
