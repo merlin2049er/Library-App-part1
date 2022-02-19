@@ -20,6 +20,7 @@ csv.each do |row|
   t.Pages = row['Pages']
   t.Publisher = row['Publisher']
   t.Copies = row['Copies']
+  t.user_id = 1
   t.save
 puts t.errors.inspect
 end
