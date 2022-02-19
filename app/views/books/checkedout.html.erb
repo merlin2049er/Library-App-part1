@@ -19,13 +19,10 @@
   <tbody>
     <% @checkedout.each do |book| %>
       <tr>
-        <td><%= book.book_id %></td>
+        <td> <%  title = Book.find(book.book_id) %><%= title.Title %></td>
         <td><%= book.checkedout %></td>
         <td><%= book.duedate %></td>
         <td><%= book.checkedoutstatus %></td>
-
-
-
         <td> <%= link_to "Return",  controller: "books", action: "return" , id: book.book_id %> </td>
 
 

@@ -55,7 +55,7 @@
   <tbody>
     <% @checkdoutby.each do |book| %>
       <tr>
-        <td> fred </td>
+        <td><%= book.user_email %> </td>
         <td><%= book.checkedout %></td>
         <td><%= book.duedate %></td>
         <td><%= book.checkedoutstatus %></td>
