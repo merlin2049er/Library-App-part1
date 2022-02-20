@@ -65,24 +65,14 @@ class BooksController < ApplicationController
   end
 
   def borrow
-
-  id = params[:id]
+    redirect_to root_url  if !current_user
+    id = params[:id]
     # check to see if book is already checked out no more than 1 copy at a time
-    already_checkedout = Checkedout.where({ user_id: current_user.id, book_id: id, checkedoutstatus: true })
+    already_checkedout = Checkedout.where({ user: current_user, book_id: id, checkedoutstatus: true })
 
-
-
-  if  already_checkedout.count == 0
-    # write to table checkedout
-    c = Checkedout.new
-    c.user_id = id
-    c.book_id = @book.id
-    c.checkedout = Date.today
-    c.duedate = Date.today + 7
-    c.checkedoutstatus = 'True'
-    c.save!
-
-    flash.alert = @book.Title + " checked out..."
+    if  already_checkedout.count == 0
+       Checkedout.create({user: current_user, book: @book, checkedout: Date.today, duedate: Date.today + 7, checkedoutstatus: true})
+      flash.alert = @book.Title + " checked out..."
     else
       flash.alert = @book.Title + " already checked out, one copy permitted..."
     end

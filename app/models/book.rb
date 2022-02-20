@@ -6,5 +6,6 @@ class Book < ApplicationRecord
   validates :Pages, presence: true
 
   validates :Copies, presence: true
+  has_many :checkedouts
 
 end
