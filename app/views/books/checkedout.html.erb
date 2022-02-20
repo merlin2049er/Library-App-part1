@@ -8,10 +8,12 @@
   <thead>
     <tr>
       <th>Title</th>
-      <th>Checkout date</th>
+      <th>Check out date</th>
       <th>Due date</th>
       <th>Status</th>
+      <th>Overdue</th>
 
+      <th>Action</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -20,12 +22,20 @@
     <% @checkedout.each do |book| %>
       <tr>
         <td> <%  title = Book.find(book.book_id) %><%= title.Title %></td>
-        <td><%= book.checkedout %></td>
-        <td><%= book.duedate %></td>
+        <td><%= book.checkedout.strftime("%m/%d/%Y") %></td>
+        <td><%= book.duedate.strftime("%m/%d/%Y") %></td>
         <td><%= book.checkedoutstatus %></td>
+        <% overdue =(Time.now.to_i - book.duedate.to_i) / (60*24*60) %>
+        <% if overdue > 0 %>
+          <td> <%= overdue  %> days  </td>
+
+        <% else %>
+          <td> no  </td>
+        <% end %>
+
+
+
         <td> <%= link_to "Return",  controller: "books", action: "return" , id: book.book_id %> </td>
-
-
 
       </tr>
     <% end %>

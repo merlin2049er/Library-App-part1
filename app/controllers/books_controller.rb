@@ -5,8 +5,7 @@ class BooksController < ApplicationController
   # GET /books or /books.json
   def index
     @books = Book.all
-
-      @pagy, @books = pagy(@books)
+    @pagy, @books = pagy(@books)
   end
 
   # GET /books/1 or /books/1.json
@@ -69,7 +68,9 @@ class BooksController < ApplicationController
 
   id = params[:id]
     # check to see if book is already checked out no more than 1 copy at a time
-    already_checkedout = Checkedout.where({ book_id: id, checkedoutstatus: true })
+    already_checkedout = Checkedout.where({ user_id: current_user.id, book_id: id, checkedoutstatus: true })
+
+
 
   if  already_checkedout.count == 0
     # write to table checkedout
@@ -79,7 +80,7 @@ class BooksController < ApplicationController
     c.checkedout = Date.today
     c.duedate = Date.today + 7
     c.checkedoutstatus = 'True'
-    c.save
+    c.save!
 
     flash.alert = @book.Title + " checked out..."
     else
@@ -93,6 +94,8 @@ class BooksController < ApplicationController
   def checkedout
 
     @checkedout = Checkedout.where('user_id =?', current_user.id).and(Checkedout.where(checkedoutstatus: true))
+
+
     @count = @checkedout.count
 
   end

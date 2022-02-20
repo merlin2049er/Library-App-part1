@@ -37,6 +37,10 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'devise', '~> 4.8', '>= 4.8.1'
 gem 'pagy', '~> 4.1'
 
+#schedule rake mailer task
+gem 'sidekiq', '~> 6.4', '>= 6.4.1'
+gem 'sidekiq-cron', '~> 1.2'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

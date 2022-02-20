@@ -6,6 +6,8 @@
 
   <% if user_signed_in? && @user.admin %>
     <%= link_to "Book log",  controller: "books", action: "booklog"  %>
+    <%= link_to "Add book",  controller: "books", action: "new"  %>
+
   <% end %>
 <h1>Books</h1>
 
@@ -41,8 +43,10 @@
 
         <td><%= remaining = book.Copies - taken%></td>
 
-        <% if user_signed_in? %>
+        <% if user_signed_in? && remaining > 0 %>
             <td> <%= link_to "Borrow",  controller: "books", action: "borrow" , id: book.id %> </td>
+            <% else %>
+          <td>  Borrow</td>
         <% end %>
         <td><%= link_to 'Show', book %></td>
 
