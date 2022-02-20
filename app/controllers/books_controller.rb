@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   include Pagy::Backend
-  before_action :set_book, only: %i[ show edit update destroy borrow return]
+  before_action :set_book, only: %i[ show edit update destroy borrow return pay]
 
   # GET /books or /books.json
   def index
@@ -109,6 +109,10 @@ class BooksController < ApplicationController
     flash.alert =  "book returned..."
     redirect_to root_path
 
+  end
+
+  def pay
+      render "layouts/payfines"
   end
 
   private

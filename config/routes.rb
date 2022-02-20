@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   post 'borrow/(:id)', to: 'books#borrow'
   get 'return/(:id)', to: 'books#return'
+  get 'pay/(:id)', to: 'books#pay'
+
 
   require 'sidekiq/web'
   require 'sidekiq/cron/web'
