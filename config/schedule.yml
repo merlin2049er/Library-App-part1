@@ -1,5 +1,4 @@
-# schedule:
-#   hard_job:
-#     cron: "59 23 * * *"
-#     class: "HardJob"
-#     queue: default
+my_first_job:
+  cron: "*/1 * * * *"
+  class: "HardJob"
+  name: 'Hard worker - every 5mi'

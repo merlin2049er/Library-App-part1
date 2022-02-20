@@ -8,7 +8,7 @@
   </head>
 
     <body>
-        <h1>Hello, <%= @user.name %></h1>
+        <h1>Hello, <%= @user.email %></h1>
         <p>
           You have the current books checked out, please make sure you return them on time, to avoid late fees.
         </p>
@@ -27,7 +27,7 @@
             </thead>
 
             <tbody>
-              <% @checkedout.each do |book| %>
+              <% @user.checkedouts.each do |book| %>
                 <tr>
                   <td> <%  title = Book.find(book.book_id) %><%= title.Title %></td>
                   <td><%= book.checkedout %></td>
