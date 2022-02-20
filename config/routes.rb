@@ -11,4 +11,10 @@ Rails.application.routes.draw do
   post 'borrow/(:id)', to: 'books#borrow'
   get 'return/(:id)', to: 'books#return'
 
+  require 'sidekiq/web'
+  require 'sidekiq/cron/web'
+
+  Rails.application.routes.draw do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 end
