@@ -13,6 +13,7 @@ class BooksController < ApplicationController
 
     id = params[:id]
     @checkdoutby = Checkedout.where({ book_id: id, checkedoutstatus: true })
+    @pagy, @checkdoutby = pagy(@checkdoutby)
     @count = @checkdoutby.count
 
   end
@@ -84,7 +85,7 @@ class BooksController < ApplicationController
   def checkedout
 
     @checkedout = Checkedout.where('user_id =?', current_user.id).and(Checkedout.where(checkedoutstatus: true))
-
+    @pagy, @checkedout = pagy(@checkedout)
 
     @count = @checkedout.count
 
@@ -93,6 +94,7 @@ class BooksController < ApplicationController
   def booklog
 
     @booklog = Checkedout.all
+    @pagy, @booklog = pagy(@booklog)
     @count = Checkedout.count
 
   end
