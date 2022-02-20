@@ -1,6 +1,12 @@
-development:
-  :concurrency: 1
-production:
-  :concurrency: 1
-:queues:
-  - default
+# development:
+#   :concurrency: 1
+# production:
+#   :concurrency: 1
+# :queues:
+#   - default
+:schedule:
+  HardJob:
+    cron: '0 */1 * * * *'   
+    # cron: "59 23 * * *"
+    class: "HardJob"
+    queue: default

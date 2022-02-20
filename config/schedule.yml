@@ -1,4 +1,5 @@
-dailycheckoutremindermailerjob:
-  cron: "59 23 * * *"
-  class: "DailycheckoutreminderMailerJob"
-  queue: default
+# schedule:
+#   hard_job:
+#     cron: "59 23 * * *"
+#     class: "HardJob"
+#     queue: default

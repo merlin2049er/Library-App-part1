@@ -3,8 +3,8 @@ class DailycheckoutreminderMailerJob < ApplicationJob
 
   def perform(*args)
     # Do something later
-    User.find_each do |user|
-      ReminderMailer.with(user: user, fact: CatfactServices::Catfact.new.daily_fact).daily_catfact.deliver_now
+    User.all.each do |user|
+      ReminderMailer.with(user: user).reminder_email.deliver_now
     end
   end
 end

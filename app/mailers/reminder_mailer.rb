@@ -4,8 +4,8 @@ class ReminderMailer < ApplicationMailer
   layout 'mailer'
 
 
-  def reminder_email
-
+  def reminder_email(user)
+    @user = user
     mail(to: @user.email, subject: 'Books checked out reminder...')
 
   end
